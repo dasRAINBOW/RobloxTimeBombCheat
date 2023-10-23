@@ -1,20 +1,24 @@
 from pyautogui import *
 import tkinter as tk
-from random import uniform
+from random import uniform, choice
 from keyboard import is_pressed
 
-def find_longest_word_with_sequence(filename, sequence):
-    longest_word = ""
-    
+def find_random_word_with_sequence(filename, sequence):
+    matching_words = []  # Store words that contain the specified sequence
+
     with open(filename, 'r') as file:
         text = file.read().split()  # Read the file and split it into words
-        
-        for word in text:
-            if sequence in word:  # Check if the sequence exists in the word
-                if len(word) > len(longest_word):
-                    longest_word = word
 
-    return longest_word
+        for word in text:
+            if sequence in word:
+                matching_words.append(word)
+
+    if matching_words:
+        random_word = choice(matching_words)  # Select a random word from matching words
+        return random_word
+    else:
+        return None  # Return None if no matching word is found
+
 
 def submit_text(event=None):
     entered_text = text_entry.get()
@@ -23,7 +27,7 @@ def submit_text(event=None):
     window.destroy()  # Close the window
     filename = "english.txt"  # Change this to the path of your text file
     sequence_to_find = letters  # Change this to the sequence you want to search for
-    result = find_longest_word_with_sequence(filename, sequence_to_find)
+    result = find_random_word_with_sequence(filename, sequence_to_find)
     sleep(0.001)
     typewrite(result, uniform(0.001, 0.01))
     sleep(0.01)
