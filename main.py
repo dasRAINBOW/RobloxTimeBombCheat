@@ -29,7 +29,7 @@ def submit_text(event=None):
     sequence_to_find = letters  # Change this to the sequence you want to search for
     result = find_random_word_with_sequence(filename, sequence_to_find)
     sleep(0.001)
-    typewrite(result, uniform(0.001, 0.01))
+    typewrite(result, uniform(0.01, 0.1))
     sleep(0.01)
     press('enter')
 
